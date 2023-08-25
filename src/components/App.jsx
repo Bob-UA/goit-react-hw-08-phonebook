@@ -1,18 +1,23 @@
-import css from './App.module.css';
-import ContactForm from './ContactForm';
-import ContactList from './ContactsList';
-import Filter from './Filter';
+import { Routes, Route } from 'react-router-dom';
+import ContactsPage from 'pages/ContactsPage';
+import RegisterPage from 'pages/RegisterPage';
+import LoginPage from 'pages/LoginPage';
+import NotFound from 'pages/NotFoundPage';
+import { SharedLayout } from './SharedLayout/SharedLayout';
+
 
 function App() {
   return (
-    <div className={css.container}>
-      <h1>Phonebook</h1>
-      <ContactForm/>
-      <h2>Contacts</h2>
-      <Filter/>
-      <ContactList
-      />
-    </div>
+    <section>
+      <Routes>
+        <Route path="/" element={<SharedLayout />} >
+          <Route index element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="contacts" element={<ContactsPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </section>
   );
 }
 

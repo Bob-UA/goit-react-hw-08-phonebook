@@ -13,10 +13,11 @@ input{
 }
 
 .formContainer{
-    padding: 10px;
-    padding-right: 150px;
     width: max-content;
-border: 0.5px solid black;
 border-radius: 4px;
 margin-bottom: 20px;
+}
+
+.title{
+    font-size: 24px;
 }
