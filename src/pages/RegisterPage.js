@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import css from '../components/App.module.css'
+import { useDispatch } from 'react-redux';
+import authOperations from 'Redux/auth/auth-operations';
 
 function RegisterPage() {
-        const [name, setName] = useState('');
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     
     const reset = () => {
-      setName('');
+        setName('');
         setEmail('');
         setPassword('');
     };
@@ -28,6 +31,7 @@ function RegisterPage() {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(e);
+        // dispatch(authOperations.register({}))
         reset();
     }
     return (
