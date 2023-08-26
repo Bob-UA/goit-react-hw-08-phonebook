@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 import { Outlet, NavLink } from 'react-router-dom';
 import css from '../App.module.css';
+import UserMenu from 'components/UserMenu/UserMenu';
+import { useSelector } from 'react-redux';
+import authSelectors from 'Redux/auth/auth-selectors';
 
 const StyledLink = styled(NavLink)`
   color: #4d5ae5;
@@ -23,15 +26,17 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-export const SharedLayout = () => {
+export const Navigation = () => {
+    const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
     return (
         <div className={ css.container}>
-        <header>
-          <nav className={css.nav}>
-            <StyledLink to="/">Login</StyledLink>
-            <StyledLink to="/register">Register</StyledLink>
-            <StyledLink to="/contacts">Contacts</StyledLink>
-          </nav>
+        <header className={css.header}>
+            <nav className={css.nav}>
+                    {!isLoggedIn && <StyledLink to="/">Login</StyledLink>}
+                    {!isLoggedIn && <StyledLink to="/register">Register</StyledLink>}
+                    {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
+            </nav>
+            {isLoggedIn && <UserMenu/>}
         </header>
         <Outlet/>
       </div>

@@ -3,35 +3,48 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-const register = createAsyncThunk('/users​/register', async credentials => {
+const token = {
+    set(token) {
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    },
+    unset() {
+        axios.defaults.headers.common.Authorization = ``;
+    },
+};
+
+const register = createAsyncThunk('/users/register', async credentials => {
     try {
-        const data = await axios.post('/users​/signup', credentials);
-        console.log(data);
+        const {data} = await axios.post('/users/signup', credentials);
+        token.set(data.token);
+        return data;
     } catch (error) {
         console.log('signup', error);
     }
 })
 
-const logIn = createAsyncThunk('/users​/logIn', async credentials => {
-  try {
-    const data = await axios.post('/users/login', credentials);
-    console.log(data);
-  } catch (error) {
-    console.log('logIn', error);
-  }
+const logIn = createAsyncThunk('/users/logIn', async credentials => {
+    try {
+        const {data} = await axios.post('/users/login', credentials);
+        token.set(data.token);
+        return data;
+    } catch (error) {
+        console.log('logIn', error);
+    }
 });
 
-const logOut = createAsyncThunk('/users​/logOut', async credentials => {
+const logOut = createAsyncThunk('/users/logOut', async credentials => {
   try {
-    const data = await axios.post('/users/logout', credentials);
-    console.log(data);
+      await axios.post('/users/logout', credentials);
+      token.unset();
   } catch (error) {
     console.log('LogOut', error);
   }
 });
 
 const authOperations = {
-    register
-}
+  register,
+    logIn,
+  logOut,
+};
 
 export default authOperations;

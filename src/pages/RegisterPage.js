@@ -30,8 +30,8 @@ function RegisterPage() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(e);
-        // dispatch(authOperations.register({}))
+        console.log({ name, email, password });
+        dispatch(authOperations.register({name, email, password}))
         reset();
     }
     return (
