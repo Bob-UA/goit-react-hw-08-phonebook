@@ -3,8 +3,9 @@ import css from './ContactList.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getError, getFilter, getIsLoading } from 'Redux/selectors';
 import { useEffect } from 'react';
-import { deleteContactsThunk, getContactsThunk } from 'Redux/thunk';
 import Loader from 'components/Loader';
+import authOperations from 'Redux/auth/auth-operations';
+import { number } from 'prop-types';
 
 
 
@@ -18,18 +19,18 @@ function ContactList() {
   const dispatch = useDispatch();
 
   const onDeleteContact = contactId => {
-    dispatch(deleteContactsThunk(contactId));
+    dispatch(authOperations.deleteContact(contactId));
   };
 
 
   useEffect(() => {
-    dispatch(getContactsThunk());
+    dispatch(authOperations.getContacts());
   }, [dispatch]);
 
 
-    const getVisibleContacts = () => {
+  const getVisibleContacts = () => {
       const normalizedFilter = filter.toLowerCase();
-      return contacts.filter(contact =>
+      return contacts?.filter(contact =>
         contact.name.toLowerCase().includes(normalizedFilter)
       );
     };
@@ -38,10 +39,10 @@ function ContactList() {
   return (
     <ul className={css.list}>
       {isLoading && <div className={css.Loader}><Loader /></div>}
-      {visibleContacts.map(({ id = nanoid(), name, phone }) => (
+      {visibleContacts?.map(({ id = nanoid(), name, number }) => (
         <li key={id} className={css.item}>
           <p className={css.name}>{name}</p>
-          <p className={css.phone}>{phone}</p>
+          <p className={css.phone}>{number}</p>
           <button className={css.btn} onClick={() => onDeleteContact(id)}>
             Delete
           </button>

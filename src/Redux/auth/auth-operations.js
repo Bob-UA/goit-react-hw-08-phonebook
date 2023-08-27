@@ -41,10 +41,57 @@ const logOut = createAsyncThunk('/users/logOut', async credentials => {
   }
 });
 
+const getContacts = createAsyncThunk('/contacts', async () => {
+  try {
+    const { data } = await axios.get('/contacts');
+    return data;
+  } catch (error) {
+    console.log('getContacts', error);
+  }
+});
+
+const addContact = createAsyncThunk('/addContact', async credentials => {
+  try {
+    const { data } = await axios.post('/contacts', credentials);
+    return data;
+  } catch (error) {
+    console.log('getContacts', error);
+  }
+});
+
+const deleteContact = createAsyncThunk('/deleteContact', async credentials => {
+  try {
+    const { data } = await axios.delete(`/contacts/${credentials}`);
+    return data;
+  } catch (error) {
+    console.log('deleteContact', error);
+  }
+});
+
+const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const persistedToken = state.auth.token;
+  if (!persistedToken) {
+    return;
+  }
+  token.set(persistedToken);
+try {
+    const { data } = await axios.get('/users/current');
+    return data;
+} catch (error) {
+  console.log('refresh', error);
+}
+
+})
+
 const authOperations = {
   register,
-    logIn,
+  logIn,
   logOut,
+  getContacts,
+  addContact,
+  deleteContact,
+  fetchCurrentUser,
 };
 
 export default authOperations;

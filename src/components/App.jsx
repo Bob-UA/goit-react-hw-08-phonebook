@@ -4,9 +4,18 @@ import RegisterPage from 'pages/RegisterPage';
 import LoginPage from 'pages/LoginPage';
 import NotFound from 'pages/NotFoundPage';
 import { Navigation } from './Navigation/Navigation';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import authOperations from 'Redux/auth/auth-operations';
 
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser())
+  }, [dispatch]);
+  
   return (
     <section>
       <Routes>

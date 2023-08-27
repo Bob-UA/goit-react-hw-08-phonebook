@@ -1,11 +1,8 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { phonebookInitialState } from './initialState/phonebookInitialState';
-import {
-  addContactsThunk,
-  deleteContactsThunk,
-  getContactsThunk,
-} from './thunk';
+
 import { handleFulfilled, handleFulfilledAdd, handleFulfilledDelete, handleFulfilledGet, handlePending, handleRejected } from 'components/services/services';
+import authOperations from './auth/auth-operations';
 
 const STATUS = {
   PENDING: 'pending',
@@ -19,30 +16,30 @@ export const phonebookSlice = createSlice({
   initialState: phonebookInitialState,
   extraReducers: builder => {
     builder
-      .addCase(getContactsThunk.fulfilled, handleFulfilledGet)
-      .addCase(addContactsThunk.fulfilled, handleFulfilledAdd)
-      .addCase(deleteContactsThunk.fulfilled, handleFulfilledDelete)
+      .addCase(authOperations.getContacts.fulfilled, handleFulfilledGet)
+      .addCase(authOperations.addContact.fulfilled, handleFulfilledAdd)
+      .addCase(authOperations.deleteContact.fulfilled, handleFulfilledDelete)
       .addMatcher(
         isAnyOf(
-          addContactsThunk[STATUS.PENDING],
-          deleteContactsThunk[STATUS.PENDING],
-          getContactsThunk[STATUS.PENDING]
+          authOperations.addContact[STATUS.PENDING],
+          authOperations.deleteContact[STATUS.PENDING],
+          authOperations.getContacts[STATUS.PENDING]
         ),
         handlePending
       )
       .addMatcher(
         isAnyOf(
-          addContactsThunk[STATUS.REJECTED],
-          deleteContactsThunk[STATUS.REJECTED],
-          getContactsThunk[STATUS.REJECTED]
+          authOperations.addContact[STATUS.REJECTED],
+          authOperations.deleteContact[STATUS.REJECTED],
+          authOperations.getContacts[STATUS.REJECTED]
         ),
         handleRejected
       )
       .addMatcher(
         isAnyOf(
-          addContactsThunk[STATUS.FULFILLED],
-          deleteContactsThunk[STATUS.FULFILLED],
-          getContactsThunk[STATUS.FULFILLED]
+          authOperations.addContact[STATUS.FULFILLED],
+          authOperations.deleteContact[STATUS.FULFILLED],
+          authOperations.getContacts[STATUS.FULFILLED]
         ),
         handleFulfilled
       );

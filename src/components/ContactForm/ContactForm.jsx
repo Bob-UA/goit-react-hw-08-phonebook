@@ -3,15 +3,14 @@ import css from "./ContactForm.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { getContacts } from 'Redux/selectors';
-import { addContactsThunk } from 'Redux/thunk';
+import authOperations from 'Redux/auth/auth-operations';
 
 
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   
-  const date = new Date();
   const nameInput = nanoid();
   const phoneInput = nanoid();
 
@@ -25,21 +24,21 @@ function ContactForm() {
       setName(target.value);
     }
     if (target.name === "number") {
-      setPhone(target.value);
+      setNumber(target.value);
     }
   };
   
 const reset = () => {
   setName('');
-  setPhone('');
+  setNumber('');
 };
   
   const handleSubmit = e => {
     e.preventDefault();
-    const data = { createdAt: date.toString(), name, phone,  id: nanoid()};
+    const data = {  name, number};
     contacts.find(option => option.name === data.name)
     ? alert(`${data.name} is already in contacts`)
-    : dispatch(addContactsThunk(data));
+    : dispatch(authOperations.addContact(data));
     reset();
   };
 
@@ -66,7 +65,7 @@ const reset = () => {
             <input
               type="tel"
               name="number"
-              value={phone}
+              value={number}
               onChange={handleChange}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
