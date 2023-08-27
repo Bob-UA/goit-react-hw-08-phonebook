@@ -18,7 +18,7 @@ const register = createAsyncThunk('/users/register', async credentials => {
         token.set(data.token);
         return data;
     } catch (error) {
-        console.log('signup', error);
+        console.log('register', error);
     }
 })
 
@@ -72,7 +72,7 @@ const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) =>
   const state = thunkAPI.getState();
   const persistedToken = state.auth.token;
   if (!persistedToken) {
-    return;
+    return thunkAPI.rejectWithValue();
   }
   token.set(persistedToken);
 try {

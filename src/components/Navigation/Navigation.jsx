@@ -29,16 +29,17 @@ const StyledLink = styled(NavLink)`
 export const Navigation = () => {
     const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
     return (
-        <div className={ css.container}>
+      <div className={css.container}>
         <header className={css.header}>
-            <nav className={css.nav}>
-                    {!isLoggedIn && <StyledLink to="/">Login</StyledLink>}
-                    {!isLoggedIn && <StyledLink to="/register">Register</StyledLink>}
-                    {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
-            </nav>
-            {isLoggedIn && <UserMenu/>}
+          <nav className={css.nav}>
+            {<StyledLink to="/">Main</StyledLink>}
+            {!isLoggedIn && <StyledLink to="/login">Login</StyledLink>}
+            {!isLoggedIn && <StyledLink to="/register">Register</StyledLink>}
+            {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
+          </nav>
+          {isLoggedIn && <UserMenu />}
         </header>
-        <Outlet/>
+        <Outlet />
       </div>
     );
 }
