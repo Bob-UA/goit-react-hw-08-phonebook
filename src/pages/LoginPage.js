@@ -1,32 +1,32 @@
 import { useState } from 'react';
 import css from '../components/App.module.css';
 import { useDispatch } from 'react-redux';
-import authOperations from 'Redux/auth/auth-operations';
+import authOperations from 'Redux/auth/operations';
 
 function LoginPage() {
-        const dispatch = useDispatch();
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
-        const reset = () => {
-        setEmail('');
-        setPassword('');
-};
-    
-        const handleChange = ({ target: { name, value } }) => {
-          switch (name) {
-            case 'email':
-              return setEmail(value);
-            case 'password':
-              return setPassword(value);
-            default:
-              return;
-          }
-        };
-    const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(authOperations.logIn({ email, password }));
-        reset();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const reset = () => {
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'email':
+        return setEmail(value);
+      case 'password':
+        return setPassword(value);
+      default:
+        return;
     }
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(authOperations.logIn({ email, password }));
+    reset();
+  };
 
   return (
     <div className={css.formContainer}>

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -18,7 +19,7 @@ const register = createAsyncThunk('/users/register', async credentials => {
         token.set(data.token);
         return data;
     } catch (error) {
-        console.log('register', error);
+     toast.error('Ooops');
     }
 })
 
@@ -28,7 +29,7 @@ const logIn = createAsyncThunk('/users/logIn', async credentials => {
         token.set(data.token);
         return data;
     } catch (error) {
-        console.log('logIn', error);
+      toast.error('Ooops');
     }
 });
 
@@ -37,7 +38,7 @@ const logOut = createAsyncThunk('/users/logOut', async credentials => {
       await axios.post('/users/logout', credentials);
       token.unset();
   } catch (error) {
-    console.log('LogOut', error);
+      toast.error('Ooops');
   }
 });
 
@@ -46,7 +47,7 @@ const getContacts = createAsyncThunk('/contacts', async () => {
     const { data } = await axios.get('/contacts');
     return data;
   } catch (error) {
-    console.log('getContacts', error);
+      toast.error('Ooops');
   }
 });
 
@@ -55,7 +56,7 @@ const addContact = createAsyncThunk('/addContact', async credentials => {
     const { data } = await axios.post('/contacts', credentials);
     return data;
   } catch (error) {
-    console.log('getContacts', error);
+      toast.error('Ooops');
   }
 });
 
@@ -64,7 +65,7 @@ const deleteContact = createAsyncThunk('/deleteContact', async credentials => {
     const { data } = await axios.delete(`/contacts/${credentials}`);
     return data;
   } catch (error) {
-    console.log('deleteContact', error);
+      toast.error('Ooops');
   }
 });
 
@@ -79,12 +80,12 @@ try {
     const { data } = await axios.get('/users/current');
     return data;
 } catch (error) {
-  console.log('refresh', error);
+      toast.error('Ooops');
 }
 
 })
 
-const authOperations = {
+const operations = {
   register,
   logIn,
   logOut,
@@ -94,4 +95,4 @@ const authOperations = {
   fetchCurrentUser,
 };
 
-export default authOperations;
+export default operations;

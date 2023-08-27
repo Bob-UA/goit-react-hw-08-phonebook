@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from 'Redux/store';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Toaster } from 'react-hot-toast';
 const container = document.querySelector('#root');
 const root = createRoot(container);
 
@@ -15,6 +16,7 @@ root.render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
           <App />
+          <Toaster/>
         </BrowserRouter>
       </PersistGate>
     </Provider>

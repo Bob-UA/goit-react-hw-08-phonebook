@@ -1,15 +1,21 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { phonebookInitialState } from './initialState/phonebookInitialState';
 
-import { handleFulfilled, handleFulfilledAdd, handleFulfilledDelete, handleFulfilledGet, handlePending, handleRejected } from 'components/services/services';
-import authOperations from './auth/auth-operations';
+import {
+  handleFulfilled,
+  handleFulfilledAdd,
+  handleFulfilledDelete,
+  handleFulfilledGet,
+  handlePending,
+  handleRejected,
+} from 'components/services/services';
+import authOperations from './auth/operations';
 
 const STATUS = {
   PENDING: 'pending',
   REJECTED: 'rejected',
   FULFILLED: 'fulfilled',
 };
-
 
 export const phonebookSlice = createSlice({
   name: 'contacts',
@@ -51,8 +57,6 @@ export const phonebookSlice = createSlice({
   },
 });
 
-export const { changeFilter } =
-  phonebookSlice.actions;
-
+export const { changeFilter } = phonebookSlice.actions;
 
 export const phonebookReducer = phonebookSlice.reducer;
