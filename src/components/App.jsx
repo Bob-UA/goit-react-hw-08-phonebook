@@ -6,7 +6,6 @@ import { Navigation } from './Navigation/Navigation';
 import ContactsPage from 'pages/ContactsPage';
 import RegisterPage from 'pages/RegisterPage';
 import LoginPage from 'pages/LoginPage';
-import NotFound from 'pages/NotFoundPage';
 import MainPage from 'pages/MainPage';
 import PrivateRoute from './Route/PrivateRoute';
 import PublicRoute from './Route/PublicRoute';
@@ -50,7 +49,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<MainPage/>} />
           </Route>
         </Routes>
       </section>
