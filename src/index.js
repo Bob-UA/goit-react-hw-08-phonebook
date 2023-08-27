@@ -14,9 +14,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter basename="goit-react-hw-08-phonebook">
           <App />
-          <Toaster/>
+          <Toaster />
         </BrowserRouter>
       </PersistGate>
     </Provider>
