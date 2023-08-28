@@ -17,7 +17,6 @@ const StyledLink = styled(NavLink)`
     0px 2px 2px rgba(0, 0, 0, 0.12);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-    
 
   &.active {
     color: #ffffff;

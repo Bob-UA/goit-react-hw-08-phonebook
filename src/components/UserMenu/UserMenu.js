@@ -13,6 +13,8 @@ function UserMenu() {
 
   return (
     <div className={css.container}>
+      <div className={css.userIcon}>
+      </div>
       <span className={css.userName}>
         <p>{name}</p>
       </span>

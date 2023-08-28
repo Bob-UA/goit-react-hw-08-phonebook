@@ -29,7 +29,7 @@ function LoginPage() {
   };
 
   return (
-    <div className={css.formContainer}>
+    <div className={css.pageContainer}>
       <h1 className={css.title}>Log Into My Account</h1>
       <form onSubmit={handleSubmit}>
         <label>

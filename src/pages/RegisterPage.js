@@ -34,7 +34,7 @@ function RegisterPage() {
     reset();
   };
   return (
-    <div className={css.formContainer}>
+    <div className={css.pageContainer}>
       <h1 className={css.title}>Create new Account</h1>
       <form onSubmit={handleSubmit}>
         <label>
