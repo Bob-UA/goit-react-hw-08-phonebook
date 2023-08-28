@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from '../components/App.module.css';
 import { useDispatch } from 'react-redux';
 import authOperations from 'Redux/auth/operations';
+
 
 function RegisterPage() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState(false);
+
+  useEffect(() => {
+    if (password === rePassword) {
+      setPasswordCheck(true)
+    }
+    else
+    return setPasswordCheck(false);
+  }, [password, rePassword]);
 
   const reset = () => {
     setName('');
     setEmail('');
     setPassword('');
+    setRePassword('');
+    setPasswordCheck(false);
   };
 
   const handleChange = ({ target: { name, value } }) => {
@@ -23,6 +36,8 @@ function RegisterPage() {
         return setEmail(value);
       case 'password':
         return setPassword(value);
+      case 'rePassword':
+        return setRePassword(value);
       default:
         return;
     }
@@ -30,8 +45,8 @@ function RegisterPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
-    reset();
+    passwordCheck && dispatch(authOperations.register({ name, email, password }));
+    passwordCheck && reset();
   };
   return (
     <div className={css.pageContainer}>
@@ -39,7 +54,13 @@ function RegisterPage() {
       <form onSubmit={handleSubmit}>
         <label>
           Name
-          <input type="name" name="name" value={name} onChange={handleChange} />
+          <input
+            type="name"
+            name="name"
+            value={name}
+            required
+            onChange={handleChange}
+          />
         </label>
         <label>
           Email
@@ -47,6 +68,7 @@ function RegisterPage() {
             type="email"
             name="email"
             value={email}
+            required
             onChange={handleChange}
           />
         </label>
@@ -56,6 +78,23 @@ function RegisterPage() {
             type="password"
             name="password"
             value={password}
+            required
+            onChange={handleChange}
+          />
+        </label>
+        <label
+          style={
+            passwordCheck && rePassword
+              ? { color: '#4D5AE5' }
+              : { color: '#FF7276' }
+          }
+        >
+          Retype Password
+          <input
+            type="password"
+            name="rePassword"
+            value={rePassword}
+            required
             onChange={handleChange}
           />
         </label>

@@ -38,6 +38,7 @@ function LoginPage() {
             type="email"
             name="email"
             value={email}
+            required
             onChange={handleChange}
           />
         </label>
@@ -47,6 +48,7 @@ function LoginPage() {
             type="password"
             name="password"
             value={password}
+            required
             onChange={handleChange}
           />
         </label>
