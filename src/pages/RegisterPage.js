@@ -78,6 +78,7 @@ function RegisterPage() {
             type="password"
             name="password"
             value={password}
+            minlength="7"
             required
             onChange={handleChange}
           />
