@@ -4,9 +4,9 @@ function MainPage() {
     return (
       <div className={css.pageContainer}>
         <h1 className={css.title}>Phonebook project.</h1>
-        <p>Welcome to the Phonebook. </p>
+        <p>Welcome to the Phonebook project. </p>
         <div className={css.flexContainer}>
-          <p>This project created on</p>{' '}
+          <p>Created on</p>{' '}
           <div className={css.reactIconContainer}></div>
           <p>React and</p>
           <div className={css.reduxIconContainer}></div> <p>Redux toolkit.</p>
