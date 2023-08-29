@@ -4,11 +4,19 @@ function MainPage() {
     return (
       <div className={css.pageContainer}>
         <h1 className={css.title}>Phonebook project.</h1>
-        <p>Welcome to the Phonebook project, which is based on React.</p>
-        <span>
-          Created by Oleksandr Shkut. For reaching out, please use{' '}
-          <a href="https://www.linkedin.com/in/oleksandr-shkut/">Linkedin</a>
-        </span>
+        <p>Welcome to the Phonebook. </p>
+        <div className={css.flexContainer}>
+          <p>This project created on</p>{' '}
+          <div className={css.reactIconContainer}></div>
+          <p>React and</p>
+          <div className={css.reduxIconContainer}></div> <p>Redux toolkit.</p>
+        </div>
+        <div className={css.authorContainer}>
+          <p>By Oleksandr Shkut.</p>
+          <a href="https://www.linkedin.com/in/oleksandr-shkut/">
+            <div className={css.linkedinIcon}></div>
+          </a>
+        </div>
       </div>
     );
 }

@@ -57,3 +57,50 @@ input{
        color: #ffffff;
     background-color: #404bbf;
     border: 1px solid #404bbf;}
+
+.linkedinIcon{
+    margin-left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background-image: url("../icons/linkedIn-icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  scale: 1;
+    transition: scale 250ms;
+    }
+
+    .linkedinIcon:hover{
+        scale: 1.2;
+    }
+
+    .flexContainer{
+        display: flex;
+        align-items: center;
+    }
+
+    .authorContainer{
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .reactIconContainer{
+            margin-left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background-image: url("../icons/react-icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+    }
+
+        .reduxIconContainer{
+            margin-left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background-image: url("../icons/redux.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+    }
